@@ -1,9 +1,6 @@
 QBShared = QBShared or {}
 QBShared.ForceJobDefaultDutyAtLogin = true -- true: Force duty state to jobdefaultDuty | false: set duty state from database last saved
-QBShared.QBJobsStatus = false -- true: integrate qb-jobs into the whole of qb-core | false: treat qb-jobs as an add-on resource.
-QBShared.Jobs = {} -- All of below has been migrated into qb-jobs
-if not QBShared.QBJobsStatus then
-    QBShared.Jobs = {
+QBShared.Jobs = {
 	['unemployed'] = {
 		label = 'Civilian',
 		defaultDuty = true,
@@ -11,36 +8,55 @@ if not QBShared.QBJobsStatus then
 		grades = {
             ['0'] = {
                 name = 'Freelancer',
-                payment = 10
+                payment = 60
             },
         },
 	},
 	['police'] = {
 		label = 'Law Enforcement',
-        type = "leo",
-		defaultDuty = true,
+		defaultDuty = false,
 		offDutyPay = false,
 		grades = {
             ['0'] = {
-                name = 'Recruit',
-                payment = 50
+                name = 'Cadet',
+                payment = 250
             },
 			['1'] = {
                 name = 'Officer',
-                payment = 75
+                payment = 400
             },
 			['2'] = {
-                name = 'Sergeant',
-                payment = 100
+                name = 'Senior Officer',
+                payment = 700
             },
 			['3'] = {
-                name = 'Lieutenant',
-                payment = 125
+                name = 'Corporal',
+                payment = 1000
             },
 			['4'] = {
+                name = 'Sergeant',
+                payment = 1450
+            },
+            ['5'] = {
+                name = 'Lieutenant',
+                payment = 2000
+            },
+            ['6'] = {
+                name = 'Captain',
+                payment = 2500
+            },
+            ['7'] = {
+                name = 'Commander',
+                payment = 2500
+            },
+            ['8'] = {
+                name = 'Assistant chief',
+                payment = 2500
+            },
+            ['9'] = {
                 name = 'Chief',
-				isboss = true,
-                payment = 150
+                isboss = true,
+                payment = 500
             },
         },
 	},
@@ -50,25 +66,68 @@ if not QBShared.QBJobsStatus then
 		offDutyPay = false,
 		grades = {
             ['0'] = {
-                name = 'Recruit',
-                payment = 50
+                name = 'Probationary',
+                payment = 650
             },
 			['1'] = {
-                name = 'Paramedic',
-                payment = 75
+                name = 'EMT',
+                payment = 950
             },
 			['2'] = {
-                name = 'Doctor',
-                payment = 100
+                name = 'Senior EMT',
+                payment = 950
             },
 			['3'] = {
-                name = 'Surgeon',
-                payment = 125
+                name = 'Volunteer',
+                payment = 1250
             },
 			['4'] = {
-                name = 'Chief',
-				isboss = true,
-                payment = 150
+                name = 'Paramedic',
+                payment = 1250
+            },
+            ['5'] = {
+                name = 'Senior Paramedic',
+                payment = 1250
+            },
+            ['6'] = {
+                name = 'Lieutenant',
+                payment = 1500
+            },
+            ['7'] = {
+                name = 'Captain',
+                payment = 1500
+            },
+            ['8'] = {
+                name = 'Battalion Chief',
+                payment = 1750
+            },
+            ['9'] = {
+                name = 'Deputy Fire Chief',
+                payment = 1750
+            },
+            ['10'] = {
+                name = 'Assistant Fire Chief',
+                payment = 2500
+            },
+            ['11'] = {
+                name = 'Fire Chief',
+                payment = 2500
+            },
+            ['12'] = {
+                name = 'Nurse',
+                payment = 1500
+            },
+            ['13'] = {
+                name = 'Intern',
+                payment = 2000
+            },
+            ['14'] = {
+                name = 'Resident',
+                payment = 2000
+            },
+            ['15'] = {
+                name = 'Attending',
+                payment = 2500
             },
         },
 	},
@@ -128,7 +187,7 @@ if not QBShared.QBJobsStatus then
             },
         },
 	},
-    ['bus'] = {
+     ['bus'] = {
 		label = 'Bus',
 		defaultDuty = true,
 		offDutyPay = false,
@@ -136,6 +195,28 @@ if not QBShared.QBJobsStatus then
             ['0'] = {
                 name = 'Driver',
                 payment = 50
+            },
+		},
+	},
+    ['vanilla'] = {
+		label = 'DJ',
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+            ['0'] = {
+                name = 'DJ',
+                payment = 100
+            },
+		},
+	},
+    ['sydpawn'] = {
+		label = 'PawnStars',
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+            ['0'] = {
+                name = 'Pawner',
+                payment = 400
             },
 		},
 	},
@@ -169,7 +250,6 @@ if not QBShared.QBJobsStatus then
 	},
 	['mechanic'] = {
 		label = 'Mechanic',
-        type = "mechanic",
 		defaultDuty = true,
 		offDutyPay = false,
 		grades = {
@@ -203,7 +283,7 @@ if not QBShared.QBJobsStatus then
 		grades = {
             ['0'] = {
                 name = 'Judge',
-                payment = 100
+                payment = 10000
             },
         },
 	},
@@ -273,6 +353,86 @@ if not QBShared.QBJobsStatus then
             },
         },
 	},
+    ["burgershot"] = {
+        label = "Burgershot",
+        defaultDuty = true,
+        grades = {
+            ['0'] = {
+                name = "Trainee",
+                payment = 50
+            },
+            ['1'] = {
+                name = "Employee",
+                payment = 75
+            },
+            ['2'] = {
+                name = "Burger Flipper",
+                payment = 100
+            },
+            ['3'] = {
+                name = "Manager",
+                payment = 125
+            },
+            ['4'] = {
+                name = "Owner",
+                isboss = true,
+                payment = 150
+            },
+        },
+    },
+    ["timmies"] = {
+		label = "Tim Hortons",
+		defaultDuty = true,
+		bossmenu = vector3(-342.291, -133.370, 39.009),
+		grades = {
+            ['0'] = {
+                name = "In Training",
+                payment = 2500
+            },
+			['1'] = {
+                name = "Baker",
+                payment = 3500
+            },
+			['2'] = {
+                name = "Cashier",
+                payment = 4500
+            },
+			['3'] = {
+                name = "Supervisor",
+                payment = 5000
+            },
+			['4'] = {
+                name = "Manager",
+				isboss = true,
+                payment = 5500
+            },
+        },
+	},
+    ["uwu"] = {
+		label = "uWu Cafe",
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+			['0'] = {
+				name = "Barista",
+				payment = 18
+			},
+			['1'] = {
+				name = "Chef",
+				payment = 21
+			},
+			['2'] = {
+				name = "Manager",
+				payment = 33,
+				isboss = true
+			},
+			['3'] = {
+				name = "Owner",
+				payment = 33,
+				isboss = true
+			},
+		},
+	},
 	['hotdog'] = {
 		label = 'Hotdog',
 		defaultDuty = true,
@@ -284,5 +444,70 @@ if not QBShared.QBJobsStatus then
             },
         },
 	},
-    }
-end
+    ['pilot'] = {
+		label = 'Pilot',
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+            ['0'] = {
+                name = 'Pilot',
+                payment = 1000
+            },
+        },
+	},
+    ["gasmonkey"] = {
+		label = "GassMonkeyy",
+		defaultDuty = true,
+		grades = {
+            ['0'] = {
+                name = "Fuck Up",
+                payment = 50
+            },
+			['1'] = {
+                name = "Oil Turner",
+                payment = 75
+            },
+			['2'] = {
+                name = "Spark Ignition",
+                payment = 100
+            },
+			['3'] = {
+                name = "Engine Cease",
+                payment = 125
+            },
+			['4'] = {
+                name = "Big Mike",
+				isboss = true,
+                payment = 150
+            },
+        },
+	},
+    ['oilwell'] = {
+        label = 'Oil Company',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Oilwell Operator',
+                payment = 50
+            },
+            ['1'] = {
+                name = 'Oilwell Operator tier 2',
+                payment = 75
+            },
+            ['2'] = {
+                name = 'Event Driver tier 2',
+                payment = 100
+            },
+            ['3'] = {
+                name = 'Sales',
+                payment = 125
+            },
+            ['4'] = {
+                name = 'CEO',
+                isboss = true,
+                payment = 150
+            },
+        },
+    },
+}
